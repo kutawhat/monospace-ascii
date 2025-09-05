@@ -1,7 +1,5 @@
-# Monospace (ASCII art generator)
+# Monospace (ASCII art generator) by Mike Bespalov
 
-A Pen created on CodePen.
+[Original project](https://codepen.io/Mikhail-Bespalov/pen/JoPqYrz) created on CodePen by [Mike Bespalov](https://codepen.io/Mikhail-Bespalov/pen/JoPqYrz)
 
-Original URL: [https://codepen.io/Mikhail-Bespalov/pen/JoPqYrz](https://codepen.io/Mikhail-Bespalov/pen/JoPqYrz).
-
-# monospace-ascii
+I just tweaked some css styles and added the ability to download in SVG format.

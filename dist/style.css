@@ -1,0 +1,565 @@
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background-color: #121212; /* Refined dark theme */
+  color: #f5f5f5;
+  line-height: 1.6;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme toggle switch styles */
+.theme-switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+.theme-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.theme-switch .slider {
+  position: absolute;
+  cursor: pointer;
+  width: 40px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2c2c2c;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.theme-switch .slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: #808080;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.theme-switch input:checked + .slider {
+  background-color: #4a9eff;
+}
+
+.theme-switch input:checked + .slider:before {
+  transform: translateX(16px);
+  background-color: #ffffff;
+}
+
+.theme-switch-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+/* Toast notification styles */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  left: 35%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 89, 255, 0.5);
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast.show {
+  opacity: 1;
+}
+
+.toast .icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+
+.toast .icon svg {
+  width: 100%;
+  height: 100%;
+  color: #fff;
+}
+
+/* Делаем контейнер компактным */
+.control {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  width: fit-content;
+}
+
+.layout {
+  display: flex;
+  height: 100vh;
+  position: relative;
+}
+
+/* Sidebar that hugs its content */
+.sidebar {
+  min-width: min-content;
+  max-width: max-content;
+  flex-shrink: 0;
+  background: rgba(28, 28, 32, 0.95);
+  color: #f5f5f5;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.sidebar h3 {
+  margin: 10px 0;
+  font-size: 1.1rem;
+}
+
+.control-group {
+  margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.control-group:last-of-type {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  margin: 12px 0;
+  transition: all 0.2s ease;
+}
+
+.control label {
+  flex: 0 0 150px;
+  align-items: center;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  color: rgba(245, 245, 245, 0.9);
+  font-weight: 500;
+  user-select: none;
+}
+
+/* File input styling */
+.control input[type="file"] {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.control input[type="file"] + label {
+  flex: 1;
+  margin: 0;
+  padding: 8px 40px 8px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: white;
+  background: #4a9eff;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+.control input[type="file"] + label::after {
+  content: "";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  background: url("../svg/file-arrow-up.svg") no-repeat center center;
+  background-size: 18px 18px;
+}
+
+.control input[type="file"] + label:hover {
+  background: #2b7fdb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.control input[type="file"] + label:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.file-upload-control {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.file-upload-control .control {
+  width: 100%;
+  margin: 0;
+}
+
+.file-info {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  color: rgba(245, 245, 245, 0.8);
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.2s ease;
+}
+
+.file-preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.file-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.file-details {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+
+.file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.file-info svg {
+  color: rgba(245, 245, 245, 0.6);
+  flex-shrink: 0;
+}
+
+.file-info.has-file {
+  display: inline-flex;
+}
+
+/* Custom checkbox styles */
+.control input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.control input[type="checkbox"]:hover {
+  border-color: #4a9eff;
+  background: rgba(74, 158, 255, 0.1);
+}
+
+.control input[type="checkbox"]:checked {
+  background: #4a9eff;
+  border-color: #4a9eff;
+}
+
+.control input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: url("../svg/check.svg") no-repeat center center;
+  background-size: contain;
+}
+
+/* Radio button styles */
+.control input[type="radio"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.control input[type="radio"]:hover {
+  border-color: #4a9eff;
+  background: rgba(74, 158, 255, 0.1);
+}
+
+.control input[type="radio"]:checked {
+  border: 2px solid #4a9eff;
+}
+
+.control input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #4a9eff;
+  border-radius: 50%;
+  left: 3px;
+  top: 3px;
+}
+
+.control input[type="range"],
+.control input[type="text"] {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 4px;
+  color: #f5f5f5;
+  transition: all 0.2s ease;
+}
+
+.control select {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(255, 255, 255, 0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")
+    no-repeat right 8px center;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px 32px 8px 8px;
+  color: #f5f5f5;
+  transition: all 0.2s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.control input[type="range"] {
+  height: 6px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  outline: none;
+}
+
+.control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #4a9eff;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.control input[type="range"]::-webkit-slider-thumb:hover {
+  background: #2b7fdb;
+}
+
+.control select:focus,
+.control input[type="text"]:focus {
+  outline: none;
+}
+
+.value-label {
+  display: inline-block;
+  width: 45px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-family: "SF Mono", Consolas, Monaco, monospace;
+  color: #4a9eff;
+  background: rgba(74, 158, 255, 0.1);
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: var(--sidebar-width, min-content);
+  background: #000;
+  color: #eee;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0;
+  position: relative;
+}
+
+#ascii-art {
+  flex: 1;
+  background: #00000000;
+  padding: 20px;
+  margin: 0;
+  white-space: pre;
+  font-family: Consolas, Monaco, "Liberation Mono", monospace;
+  font-size: 7px;
+  line-height: 7px;
+  overflow-y: auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 0;
+}
+
+.button-group {
+  display: flex;
+  justify-content: left;
+  padding: 20px;
+  flex: 0 0 auto;
+  height: 76px;
+  box-sizing: border-box;
+  position: fixed;
+  bottom: 0;
+  left: var(--sidebar-width);
+  right: 0;
+}
+
+button {
+  margin-right: 12px;
+  padding: 8px 16px;
+  background: #4a9eff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#reset {
+  background: #393939;
+}
+
+button:hover {
+  background: #2b7fdb;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#reset:hover {
+  background: #ff6427;
+}
+
+body.light-mode {
+  background-color: #fff;
+  color: #000;
+}
+
+body.light-mode .sidebar {
+  background: #f4f4f4;
+  color: #000;
+}
+
+body.light-mode .main-content {
+  background: #fff;
+  color: #000;
+}
+
+body.light-mode #ascii-art {
+  background: #fff;
+}
+
+body.light-mode .control input[type="checkbox"],
+body.light-mode .control input[type="radio"] {
+  border-color: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .control input[type="checkbox"]:hover,
+body.light-mode .control input[type="radio"]:hover {
+  border-color: #4a9eff;
+  background: rgba(74, 158, 255, 0.1);
+}
+
+body.light-mode .control input[type="checkbox"]:checked {
+  background: #4a9eff;
+  border-color: #4a9eff;
+}
+
+body.light-mode .control input[type="file"] + label {
+  color: white;
+  background: #4a9eff;
+}
+
+body.light-mode .control input[type="file"] + label:hover {
+  background: #2b7fdb;
+}
+
+body.light-mode .file-info {
+  background: rgba(0, 0, 0, 0.05);
+  border-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.8);
+}
+
+body.light-mode .file-info svg {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+body.light-mode .control select {
+  background: rgba(0, 0, 0, 0.05)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='rgba(0, 0, 0, 0.6)' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")
+    no-repeat right 8px center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #000;
+}
+
+body.light-mode label {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+body.light-mode .control input[type="range"] {
+  background: rgba(0, 0, 0, 0.05);
+}
