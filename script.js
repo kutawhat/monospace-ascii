@@ -749,7 +749,7 @@ async function showToast(message, isSuccess = true, duration = 2000) {
   if (isSuccess) {
     // Load and insert SVG content
     try {
-      const response = await fetch('/svg/check.svg');
+      const response = await fetch('./svg/check.svg');
       const svgContent = await response.text();
       iconSpan.innerHTML = svgContent;
     } catch (error) {

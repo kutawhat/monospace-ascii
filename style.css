@@ -204,7 +204,7 @@ body {
   transform: translateY(-50%);
   width: 18px;
   height: 18px;
-  background: url("../svg/file-arrow-up.svg") no-repeat center center;
+  background: url("./svg/file-arrow-up.svg") no-repeat center center;
   background-size: 18px 18px;
 }
 
@@ -313,7 +313,7 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  background: url("../svg/check.svg") no-repeat center center;
+  background: url("./svg/check.svg") no-repeat center center;
   background-size: contain;
 }
 
