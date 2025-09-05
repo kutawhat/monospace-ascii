@@ -756,7 +756,7 @@ async function showToast(message, isSuccess = true, duration = 2000) {
       console.error('Failed to load check icon:', error);
     }
   } else {
-    iconSpan.textContent = '❌';
+    iconSpan.textContent = '⨯';
   }
 
   const messageSpan = document.createElement('span');
@@ -812,7 +812,7 @@ function updateSettings() {
 }
 
 function resetSettings() {
-  document.getElementById('asciiWidth').value = 100;
+  document.getElementById('asciiWidth').value = 160;
   document.getElementById('brightness').value = 0;
   document.getElementById('contrast').value = 0;
   document.getElementById('blur').value = 0;
