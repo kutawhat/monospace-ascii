@@ -821,7 +821,7 @@ function resetSettings() {
   document.getElementById('invert').checked = false;
   document.getElementById('ignoreWhite').checked = true;
   document.getElementById('charset').value = 'detailed';
-  document.getElementById('zoom').value = 160;
+  document.getElementById('zoom').value = 100;
   document.getElementById('edgeNone').checked = true;
   document.getElementById('edgeThreshold').value = 100;
   document.getElementById('dogEdgeThreshold').value = 100;
